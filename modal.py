@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import openpyxl
 
+
 class Main():
 
     # this function defines variable which will be further used in the code
@@ -85,11 +86,11 @@ class Main():
         return (ini_gap)
 
 
-#*******************************************************************************
+# *******************************************************************************
 
 def add_data(filename, data):
     to_add = []
-    with open('details.csv', mode='r')as csvfile:
+    with open('data.csv', mode='r')as csvfile:
         csvFile = csv.reader(csvfile)
         for lines in csvFile:
             to_add.append(lines)
@@ -113,10 +114,8 @@ def add_data(filename, data):
                 csvwriter.writerow(j)
 
 
-files = ["abdur razzak.xlsx", "Adam Craig Gilchrist.xlsx", "aftab ahmed.xlsx", "Ajay Jadeja.xlsx", "Alaister Cook.xlsx", "Allan R Border.xlsx", "alok kapali.xlsx", "Amit Mishra.xlsx", "Andrew Flintoff.xlsx", "Anil Kumble.xlsx", "aravinda de silva.xlsx", "Ashish Nehra.xlsx", "avishka gunawardene.xlsx", "Bradley James Haddin.xlsx", "CRD fernando.xlsx", "David C Boon.xlsx", "Eoin Morgan.xlsx", "Geoff Boycott.xlsx", "Gregory Stephen Chappell.xlsx", "habibul bashar.xlsx", "Ian Bell.xlsx", "Ian Botham.xlsx", "Ian Michael Chappell.xlsx", "Ijaz Ahmed.xlsx", "Imran Khan.xlsx", "imrul kayes.xlsx", "Inzamam-ul-Haq.xlsx", "Irfan Pathan.xlsx", "Javed Miandad.xlsx", "Justin L Langer.xlsx", "Kapil Dev.xlsx", "Ken Barrington.xlsx", "khaled mashud.xlsx", "khaled mehmud.xlsx", "Kimberley John Hughes.xlsx", "kumar dharmasena.xlsx", "mahela jayawardene.xlsx", "Mark A Taylor.xlsx", "mashrafe mortaza.xlsx", "Matthew Lawrence Hayden.xlsx", "Michael Atherton.xlsx", "Michael J Slater.xlsx",
-         "Michael John Clarke.xlsx", "mohammad ashraful.xlsx", "Mohammad Kaif.xlsx", "mohammad rafique.xlsx", "Mohsin Khan.xlsx", "MS attapatu.xlsx", "Murli Karthik.xlsx", "Mushtaq Ahmed.xlsx", "nassir hossain.xlsx", "Norman Cowans.xlsx", "nuwan kulasekara.xlsx", "Paul Collingwood.xlsx", "Praveen Kumar.xlsx", "Ramiz Raja.xlsx", "rangana herath.xlsx", "Rashid Latif.xlsx", "Ravi Bopara.xlsx", "Richard Ellison.xlsx", "Ricky Thomas Ponting.xlsx", "Robert Croft.xlsx", "romesh kaluwitharana.xlsx", "russel arnold.xlsx", "ruwan kalpage.xlsx", "Saeed Ajmal.xlsx", "Saleem Malik.xlsx", "sanath jayasuriya.xlsx", "sangarangen anurag.xlsx", "Sanjay Manjrekar.xlsx", "Shahid Afridi.xlsx", "Shoaib Akhtar.xlsx", "Simon Mathew Katich.xlsx", "Stephen Rodger Waugh.xlsx", "Steven Finn.xlsx", "Suresh Raina.xlsx", "tillakaratne dilshan.xlsx", "Umar Gul.xlsx", "upul chandana.xlsx", "Virendra Sehwag.xlsx", "VVS Laxman.xlsx", "Wasim Akram.xlsx", "Younis Khan.xlsx", "Yuvraj Singh.xlsx", "Zaheer Khan.xlsx"]
-
-    
+files = ["AB de Villiers.xlsx", "abdur razzak.xlsx", "Adam Bacher.xlsx", "Adam Craig Gilchrist.xlsx", "Adrian Barath.xlsx", "aftab ahmed.xlsx", "Ajay Jadeja.xlsx", "Alaister Cook.xlsx", "Alexander Bell.xlsx", "Ali Bacher.xlsx", "Allan Donald.xlsx", "Allan R Border.xlsx", "alok kapali.xlsx", "Amit Mishra.xlsx", "Andrew Flintoff.xlsx", "Anil Kumble.xlsx", "aravinda de silva.xlsx", "Ashish Nehra.xlsx", "avishka gunawardene.xlsx", "Basil Butcher.xlsx", "Boeta Dippenaar.xlsx", "Bradley James Haddin.xlsx", "Carlton Baugh.xlsx", "Charles Athey.xlsx", "Claude Carter.xlsx", "Courtney Browne.xlsx", "CRD fernando.xlsx", "Curtly Ambrose.xlsx", "Daryll Cullinan.xlsx", "David C Boon.xlsx", "Devendra Bishoo.xlsx", "Eddie Barlow.xlsx", "Eldine Baptiste.xlsx", "Eoin Morgan.xlsx", "Geoff Boycott.xlsx", "George Camacho.xlsx", "Gerry Alexander.xlsx", "Gregory Stephen Chappell.xlsx", "habibul bashar.xlsx", "Hansie Cronje.xlsx", "Hashim Amla.xlsx", "Horace Cameron.xlsx", "Ian Bell.xlsx", "Ian Bishop.xlsx", "Ian Botham.xlsx", "Ian Michael Chappell.xlsx", "Ijaz Ahmed.xlsx", "Imran Khan.xlsx", "imrul kayes.xlsx", "Inshan ALi.xlsx", "Inzamam-ul-Haq.xlsx", "Irfan Pathan.xlsx", "Ivan Barrow.xlsx", "James Blanckenberg.xlsx", "James Christy.xlsx", "Javed Miandad.xlsx", "Jean Paul Duminy.xlsx", "Jimmy Adams.xlsx", "John Cheetham.xlsx", "John Commaille.xlsx", "Justin L Langer.xlsx", "Kapil Dev.xlsx", "Keith Arthurton.xlsx", "Keith Boyce.xlsx", "Ken Barrington.xlsx", "Kenneth Benjamin.xlsx", "Kenneth Bland.xlsx", "khaled mashud.xlsx", "khaled mehmud.xlsx",
+         "Kimberley John Hughes.xlsx", "kumar dharmasena.xlsx", "Kyle Abbott.xlsx", "mahela jayawardene.xlsx", "Mark A Taylor.xlsx", "Mark Boucher.xlsx", "mashrafe mortaza.xlsx", "Matthew Lawrence Hayden.xlsx", "Michael Atherton.xlsx", "Michael Carew.xlsx", "Michael J Slater.xlsx", "Michael John Clarke.xlsx", "mohammad ashraful.xlsx", "Mohammad Kaif.xlsx", "mohammad rafique.xlsx", "Mohsin Khan.xlsx", "MS attapatu.xlsx", "Murli Karthik.xlsx", "Mushtaq Ahmed.xlsx", "nassir hossain.xlsx", "Neil Adcock.xlsx", "Nico Boje.xlsx", "Norman Cowans.xlsx", "nuwan kulasekara.xlsx", "Omari Banks.xlsx", "Paul Adams.xlsx", "Paul Collingwood.xlsx", "Pedro Collins.xlsx", "Praveen Kumar.xlsx", "Ramiz Raja.xlsx", "rangana herath.xlsx", "Rashid Latif.xlsx", "Ravi Bopara.xlsx", "Richard Ellison.xlsx", "Ricky Thomas Ponting.xlsx", "Robert Catteral.xlsx", "Robert Croft.xlsx", "romesh kaluwitharana.xlsx", "russel arnold.xlsx", "ruwan kalpage.xlsx", "Saeed Ajmal.xlsx", "Saleem Malik.xlsx", "sanath jayasuriya.xlsx", "sangarangen anurag.xlsx", "Sanjay Manjrekar.xlsx", "Shahid Afridi.xlsx", "Sheik Bacchus.xlsx", "Sherwin Campbell.xlsx", "Shivnarine Chanderpaul.xlsx", "Shoaib Akhtar.xlsx", "Simon Mathew Katich.xlsx", "Stephen Cook.xlsx", "Stephen Rodger Waugh.xlsx", "Steven Finn.xlsx", "Sulieman Benn.xlsx", "Suresh Raina.xlsx", "tillakaratne dilshan.xlsx", "Tino Best.xlsx", "Umar Gul.xlsx", "upul chandana.xlsx", "Virendra Sehwag.xlsx", "VVS Laxman.xlsx", "Wasim Akram.xlsx", "Winston Benjamin.xlsx", "Younis Khan.xlsx", "Yuvraj Singh.xlsx", "Zaheer Khan.xlsx"]
 id = 1
 for i in files:
     top20 = [0 for j in range(20)]
@@ -134,7 +133,7 @@ for i in files:
         continue
     ag, sc, ini = main.file_open()
     innings = len(ini)
-    if(innings <= 20):
+    if (innings <= 20):
         continue
     scores = []
     for i in sc:
@@ -150,8 +149,9 @@ for i in files:
         top20.append(max(sc))
         sc.remove(max(sc))
     avg_top_score = sum(top20)/20
-    for j in range(0,len(scores)):
-        if(scores[j] >= avg_top_score):
+    for j in range(0, len(scores)):
+        if (scores[j] >= avg_top_score):
             tim_better_20 = (j+1)/innings
-    add_data("details.csv", [id,name,ret_age,deb_age,lon_gap,tim_best_mov_avg,innings,tim_worst_mov_avg,tim_better_20])
+    add_data("data.csv", [ret_age, deb_age, lon_gap,
+             tim_best_mov_avg, innings, tim_worst_mov_avg, tim_better_20])
     id += 1
