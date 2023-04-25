@@ -1,115 +1,102 @@
-import math
-import random
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-import openpyxl
+import numpy as np
+import csv
+import math
+import matplotlib. pyplot as plt
+import matplotlib
+from sklearn.preprocessing import MinMaxScaler
+from keras.layers import LSTM, Dense, Dropout
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.dates as mandates
+from sklearn.preprocessing import MinMaxScaler
+from sklearn import linear_model
+from keras.models import Sequential
+from keras.layers import Dense
+import keras.backend as K
+from keras.callbacks import EarlyStopping
+from keras.optimizers import Adam
+from keras.models import load_model
+from keras.layers import LSTM
+from keras.utils.vis_utils import plot_model
+from sklearn.preprocessing import MinMaxScaler
 
 
-class Retirement():
+def mse(pre, act):
+    er = 0
+    for i in range(len(pre)):
+        er +=(pre[i][0]-act[i])**2
+    er = er/len(pre)
+    er = er**(1/2)
+    er = er/(sum(act)/len(act))
+    return (1-er)*100
 
-    def __init__(self):
-        self.param1 = 0
-        self.param2 = 0
+def add_data(filename, data):
+    to_add = []
+    with open(filename, mode='r')as csvfile:
+        csvFile = csv.reader(csvfile)
+        for lines in csvFile:
+            to_add.append(lines)
 
-    def predict_retirement(self):
-        rage = self.param1+self.param2
+    # data rows of csv file
+    rows = [data]
 
+    for i in rows:
+        to_add.append(i)
 
-class Calculation():
+    # writing to csv file
+    with open(filename, 'w') as csvfile:
+        # creating a csv writer object
+        csvwriter = csv.writer(csvfile)
 
-    def write_excel(self):
-        df = pd.DataFrame([[11, 21, 31], [12, 22, 32], [31, 32, 33]],
-                          index=['one', 'two', 'three'], columns=['a', 'b', 'c'])
-        df.to_excel('param.xlsx', sheet_name='new_sheet_name')
-
-
-# Main class for all the functions
-class Main():
-
-    # this function defines variable which will be further used in the code
-    def __init__(self, player_name):
-        self.dataframe1 = pd.read_excel(
-            'India/Batter/'+player_name+'.xlsx', sheet_name="Test")
-        self.scores = []
-        self.innings = []
-        self.ages = []
-        self.count = 1
-        self.age_num = []
-        self.moving_avg = []
-
-    # this function opens the player excel file while and returns the following data in the form of list - 1. Age of Player at every inning, 2. Runs scored in every inning, 3. Number of Inning
-    def file_open(self):
-        try:
-            while (True):
-                self.count += 1
-                if self.dataframe1['Column7'][self.count][-1] == "*":
-                    add = ''
-                    for i in self.dataframe1['Column7'][self.count]:
-                        if (i != "*"):
-                            add += i
-                elif (self.dataframe1['Column7'][self.count] == '-'):
-                    continue
-                else:
-                    add = self.dataframe1['Column7'][self.count]
-                if (str(self.dataframe1['Column18'][self.count]) != "nan"):
-                    self.ages.append(self.dataframe1['Column18'][self.count])
-                else:
-                    self.ages.append(self.ages[-1])
-                self.scores.append(float(add))
-                self.innings.append(
-                    int(self.dataframe1['Column2'][self.count]))
-        except:
-            return (self.ages, self.scores, self.innings)
-            # pass
-
-    # this function converts the age from "24 years 213 days" format to a float number which tells the age of player and returns the list of that age
-    def age_list(self, ages_list):
-        for i in ages_list:
-            self.age = float(i[0]+i[1])
-            if (i[11] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']):
-                self.age += (float(i[9]+i[10]+i[11])/365)
-            elif (i[10] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']):
-                self.age += (float(i[9]+i[10])/365)
+        # writing the data rows
+        for j in to_add:
+            if (j == []):
+                continue
             else:
-                self.age += (float(i[9])/365)
-            self.age_num.append(self.age)
-        return self.age_num
+                csvwriter.writerow(j)
 
-    # this function plots the graph between x and y values passed in the argument and name the axis as x_axis and y_axis
-    def plot_graph(self, x, y, x_axis, y_axis):
-        plt.plot(x, y)
-        plt.xlabel(x_axis)
-        plt.ylabel(y_axis)
-        plt.title('My first graph!')
-        plt.show()
-
-    # this function calculates the moving average of the player by considering "ini" innings at a time and returns the list of moving average and one more list to plot at x-axis
-    def cal_mov_avg(self, runs_scored, ini):
-        self.for_x_axis = []
-        for i in range(len(runs_scored)-ini):
-            self.avg = 0
-            for j in range(ini):
-                self.avg += runs_scored[i+j]
-            self.avg = self.avg/ini
-            self.moving_avg.append(self.avg)
-            self.for_x_axis.append(len(self.moving_avg))
-        return (self.moving_avg, self.for_x_axis)
-
-    # this function takes the list of age of the player at every inning and returns the list of gap between two consecutive innings in days
-    def gap_innings(self, ini):
-        ini_gap = []
-        for i in range(len(ini)-1):
-            ini_gap.append(round((ini[i+1]-ini[i])*365))
-        return (ini_gap)
-
-
-# Creating object of Main class and calling its function
-main = Main("Suresh Raina")
-ag, sc, ini = main.file_open()
-fin_ag = main.age_list(ag)
-ma, xa = main.cal_mov_avg(sc, 15)
-# main.plot_graph(xa, ma, "Innings", "Moving Averages")
-# print(main.gap_innings(fin_ag),"\n",sum(main.gap_innings(fin_ag))/len(main.gap_innings(fin_ag)))
-print(sum(main.gap_innings(fin_ag))/len(main.gap_innings(fin_ag)),
-      "\n", np.std(main.gap_innings(fin_ag)))
+to_add = []
+for k in range(100):
+    data = pd.read_csv("data.csv")
+    data = data.sample(frac=1)
+    #Set Target Variable
+    output_var = pd.DataFrame(data['Retirement'])
+    #Selecting the Features
+    features = [
+        "Debut Age (yrs)",	"Longest Gap b/w innings",	"Time of best moving avg",	"No of innings",	"Time of worst moving avg",	"time of better score than 20% best scores"
+        ]
+    scaler = MinMaxScaler()
+    feature_transform = scaler.fit_transform(data[features])
+    feature_transform= pd.DataFrame(columns=features, data=feature_transform, index=data.index)
+    feature_transform.head()
+    timesplit= TimeSeriesSplit(n_splits=8)
+    for train_index, test_index in timesplit.split(feature_transform):
+            X_train, X_test = feature_transform[:len(train_index)], feature_transform[len(train_index): (len(train_index)+len(test_index))]
+            y_train, y_test = output_var[:len(train_index)].values.ravel(), output_var[len(train_index): (len(train_index)+len(test_index))].values.ravel()
+    trainX =np.array(X_train)
+    testX =np.array(X_test)
+    X_train = trainX.reshape(X_train.shape[0], 1, X_train.shape[1])
+    X_test = testX.reshape(X_test.shape[0], 1, X_test.shape[1])
+    lstm = Sequential()
+    lstm.add(LSTM(32, input_shape=(1, trainX.shape[1]), activation='relu', return_sequences=False))
+    lstm.add(Dense(5))
+    lstm.add(Dense(1))
+    lstm.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy']
+                )
+    # plot_model(lstm, show_shapes=True, show_layer_names=True)
+    history=lstm.fit(X_train, y_train, epochs=500, batch_size=12, verbose=0, shuffle=False)
+    y_pred= lstm.predict(X_test, verbose = 0)
+    mean_sqaure_error = mse(y_pred, y_test)
+    c = 0
+    for j in range(len(y_test)):
+        if(y_pred[j][0] > y_test[j]):
+            c = c + y_test[j]/y_pred[j][0]
+        elif(y_pred[j][0] <= y_test[j]):
+            c = c + y_pred[j][0]/y_test[j]
+    accuracy2 = c/len(y_test)
+    c = 0
+    for j in range(len(y_test)):
+        c = c + y_pred[j][0]/y_test[j]
+    accuracy3 = c/24
+    add_data("accuracy.csv",[mean_sqaure_error,accuracy2,accuracy3])
