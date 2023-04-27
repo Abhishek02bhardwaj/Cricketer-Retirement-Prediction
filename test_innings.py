@@ -58,19 +58,19 @@ def add_data(filename, data):
 
 to_add = []
 for k in range(100):
-    data = pd.read_csv("data.csv")
-    data = data.sample(frac=1)
+    data = pd.read_csv("data_innings.csv")
+    # data = data.sample(frac=1)
     #Set Target Variable
-    output_var = pd.DataFrame(data['Retirement'])
+    output_var = pd.DataFrame(data['total innings'])
     #Selecting the Features
     features = [
-        "Debut Age (yrs)",	"Longest Gap b/w innings",	"Time of best moving avg",	"No of innings",	"Time of worst moving avg",	"time of better score than 20% best scores"
+        "current age",	"debut age",	"innings","cummalative runs",	"number of fiftees","innings of last 3 years"
         ]
     scaler = MinMaxScaler()
     feature_transform = scaler.fit_transform(data[features])
     feature_transform= pd.DataFrame(columns=features, data=feature_transform, index=data.index)
     feature_transform.head()
-    timesplit= TimeSeriesSplit(n_splits=8)
+    timesplit= TimeSeriesSplit(n_splits=4)
     for train_index, test_index in timesplit.split(feature_transform):
             X_train, X_test = feature_transform[:len(train_index)], feature_transform[len(train_index): (len(train_index)+len(test_index))]
             y_train, y_test = output_var[:len(train_index)].values.ravel(), output_var[len(train_index): (len(train_index)+len(test_index))].values.ravel()
@@ -86,17 +86,19 @@ for k in range(100):
                 )
     # plot_model(lstm, show_shapes=True, show_layer_names=True)
     history=lstm.fit(X_train, y_train, epochs=500, batch_size=12, verbose=0, shuffle=False)
+    
     y_pred= lstm.predict(X_test, verbose = 0)
+    # plt.plot(y_test, label='True Value')
+    # plt.plot(y_pred, label='LSTM Value')
+    # plt.title("Prediction by LSTM")
+    # plt.xlabel('Player')
+    # plt.ylabel('Retirement Age')
+    # plt.legend()
+    # plt.show()
     mean_sqaure_error = mse(y_pred, y_test)
     c = 0
-    for j in range(len(y_test)):
-        if(y_pred[j][0] > y_test[j]):
-            c = c + y_test[j]/y_pred[j][0]
-        elif(y_pred[j][0] <= y_test[j]):
-            c = c + y_pred[j][0]/y_test[j]
-    accuracy2 = c/len(y_test)
-    c = 0
-    for j in range(len(y_test)):
-        c = c + y_pred[j][0]/y_test[j]
-    accuracy3 = c/24
-    add_data("accuracy.csv",[mean_sqaure_error,accuracy2,accuracy3])
+    add_data("accuracy_innings.csv",[mean_sqaure_error])
+    # add = []
+    # for i in y_pred:
+    #     add.append(i[0])
+    # add_data("predicted_innings.csv",add)

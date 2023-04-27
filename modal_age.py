@@ -1,3 +1,5 @@
+# This file will store the data required to predict the age into data_age.csv file
+
 import csv
 import math
 import random
@@ -90,7 +92,7 @@ class Main():
 
 def add_data(filename, data):
     to_add = []
-    with open('data.csv', mode='r')as csvfile:
+    with open(filename, mode='r')as csvfile:
         csvFile = csv.reader(csvfile)
         for lines in csvFile:
             to_add.append(lines)
@@ -135,16 +137,18 @@ for i in files:
     innings = len(ini)
     if (innings <= 20):
         continue
+
     scores = []
+    fiftees = 0
+    for k in sc:
+        if (k >= 50):
+            fiftees += 1
     for i in sc:
         scores.append(i)
     fin_ag = main.age_list(ag)
     ma, xa = main.cal_mov_avg(sc, 10)
     ret_age = fin_ag[-1]
     deb_age = fin_ag[0]
-    lon_gap = max(main.gap_innings(fin_ag))
-    tim_best_mov_avg = (ma.index(max(ma))+10)/innings
-    tim_worst_mov_avg = (ma.index(min(ma))+10)/innings
     for k in range(20):
         top20.append(max(sc))
         sc.remove(max(sc))
@@ -152,6 +156,6 @@ for i in files:
     for j in range(0, len(scores)):
         if (scores[j] >= avg_top_score):
             tim_better_20 = (j+1)/innings
-    add_data("data.csv", [ret_age, deb_age, lon_gap,
-             tim_best_mov_avg, innings, tim_worst_mov_avg, tim_better_20])
+    if(sum(sc) > 400):
+        add_data("data_age.csv", [ret_age, deb_age, innings, sum(sc), fiftees])
     id += 1
