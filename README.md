@@ -10,7 +10,6 @@ LSTMs have been successfully applied in a wide range of tasks, such as language 
 ## Methodology
 ### The proposed approach for prediction consists of two LSTM models:
 * To predict the total number of innings a player will play in their career.
-<br>
 * To predict the retirement age with the help of data predicted by the first model.
 
 
