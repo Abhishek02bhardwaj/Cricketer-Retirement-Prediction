@@ -11,7 +11,11 @@ LSTMs have been successfully applied in a wide range of tasks, such as language 
 ### The proposed approach for prediction consists of two LSTM models:
 * To predict the total number of innings a player will play in their career.
 * To predict the retirement age with the help of data predicted by the first model.
-
+## Data Analysis
+### Data Collection
+* We collected the data for this study from a publicly available source on the [HowSTAT](http://www.howstat.com/cricket/home.asp) website which includes cricket archives and statistical databases.
+* The dataset consists of a total of 100 retired test batters and 10 active batters, with each player having different number of innings.
+* The batting statistics for each innings include runs scored, balls faced, cumulative runs and other relevant metrics.
 
 
 
