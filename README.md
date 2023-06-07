@@ -18,10 +18,10 @@ LSTMs have been successfully applied in a wide range of tasks, such as language 
 * The batting statistics for each innings include runs scored, balls faced, cumulative runs and other relevant metrics.
 ### Data Preprocessing
 It involves the following stages:
-* Discretization: Fetching the data relevant for the research.
-* Normalization: Normalizing the values of the attributes on the same scale to make the assessment easier.
-* Cleaning: Filling the missing values in the data to avoid any discrepancy.
-* Integration: Integration of data files.
+1. Discretization: Fetching the data relevant for the research.
+2. Normalization: Normalizing the values of the attributes on the same scale to make the assessment easier.
+3. Cleaning: Filling the missing values in the data to avoid any discrepancy.
+4. Integration: Integration of data files.
 <br>
 After the transformation the dataset is divided into training and testing dataset. Testing data is kept only 25% of the training data.
 
