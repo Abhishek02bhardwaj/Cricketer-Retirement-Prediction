@@ -21,7 +21,8 @@ It involves the following stages:
 * Discretization: Fetching the data relevant for the research.
 * Normalization: Normalizing the values of the attributes on the same scale to make the assessment easier.
 * Cleaning: Filling the missing values in the data to avoid any discrepancy.
-* Integration: Integration of data files.<br>
+* Integration: Integration of data files.
+<br>
 After the transformation the dataset is divided into training and testing dataset. Testing data is kept only 25% of the training data.
 
 
