@@ -16,6 +16,12 @@ LSTMs have been successfully applied in a wide range of tasks, such as language 
 * We collected the data for this study from a publicly available source on the [HowSTAT](http://www.howstat.com/cricket/home.asp) website which includes cricket archives and statistical databases.
 * The dataset consists of a total of 100 retired test batters and 10 active batters, with each player having different number of innings.
 * The batting statistics for each innings include runs scored, balls faced, cumulative runs and other relevant metrics.
-
+### Data Preprocessing
+It involves the following stages:
+* Discretization: Fetching the data relevant for the research.
+* Normalization: Normalizing the values of the attributes on the same scale to make the assessment easier.
+* Cleaning: Filling the missing values in the data to avoid any discrepancy.
+* Integration: Integration of data files.
+After the transformation the dataset is divided into training and testing dataset. Testing data is kept only 25% of the training data.
 
 
