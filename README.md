@@ -24,6 +24,7 @@ It involves the following stages:
 4. Integration: Integration of data files.
 <br>
 After the transformation the dataset is divided into training and testing dataset. Testing data is kept only 25% of the training data.
+<br>
 ### Feature extraction
 #### In this stage only relevant attributes are left and the rest others are deleted.
 The final Features given to the first model are: 
