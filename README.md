@@ -25,3 +25,4 @@ It involves the following stages:
 <br>
 After the transformation the dataset is divided into training and testing dataset. Testing data is kept only 25% of the training data.
 </br>
+### Feature Extraction
